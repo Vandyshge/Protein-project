@@ -1,0 +1,7 @@
+set terminal png size 1000,500
+set output 'data/figure/msd_MyTEMP.png'
+
+set title 'MSD of protein (T = MyTemp)'
+set xlabel 't (fs)'
+set ylabel 'msd'
+plot "/home/common/studtscm06/peptide/data/msd/temp_MyTEMP.msd" u 1:2 wl w l

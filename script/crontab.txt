@@ -1,0 +1,1 @@
+* * * * * bash /home/common/studtscm06/peptide/script/finish_lmp.sh
