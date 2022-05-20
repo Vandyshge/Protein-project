@@ -2,6 +2,7 @@
 #SBATCH --no-requeue
 #SBATCH --job-name="protein"
 #SBATCH --partition=RT
+#SBATCH --get-user-env
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
 #SBATCH --comment="tscm"
@@ -21,8 +22,6 @@ step=10
 
 curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHATID} -d text="Started tasks for Temp=($T0, $T1), step=$step"
 
-# crontab script/crontab.txt
-
 for (( temp=$T0; temp <= $T1 ; temp=temp+$step ))
 do
   sed "s/MyTEMP/$temp/g" /home/common/studtscm06/peptide/input/in.peptide > in.peptide_for_run
@@ -32,3 +31,5 @@ do
   
   curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHATID} -d text="Finished task for T = $temp"
 done
+
+rm log.lammps
